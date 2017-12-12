@@ -1,0 +1,28 @@
+
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12">
+          <div class="form-wrap">
+            <label name="movie List" class="label label-primary">Task List</label>
+              <table class="table">
+                <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Task Title</th>
+                      <th>Description</th>
+                      <th>Completion Date</th>
+                  </tr>
+                </thead>
+      <!-- Using ngFor for displaing the movie array and using ngSTyle to represent rating in different colors -->
+                  <tr appHighlighter *ngFor="let taskList of taskDetail;let i = index" [attr.data-index]="i" >
+                      <td>{{i+1}}</td>
+                      <td>{{taskList?.TaskTitle}}</td>
+                      <td>{{taskList?.Description}}</td>
+                      <td>{{taskList?.Completion_Date | date : 'yyyy-MM-dd' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

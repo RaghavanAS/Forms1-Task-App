@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12">
+          <div class="form-wrap">             
+              <form #f="ngForm" novalidate autocomplete="off" (ngSubmit)="addMovies(f.value)">
+                <div class="form-group">
+                <label name="AddTask" class="label label-primary" for="addtask"> Add Task </label>  
+                </div>
+                <div class="form-group required">
+                    <label class="col-md-2 control-label" for="title"> Title </label>
+                      <input type="text" [(ngModel)]="taskModel.TaskTitle" name="TaskTitle" class="form-control" placeholder="Enter the Task Title" required
+                          #reftitle='ngModel'>
+                      <div *ngIf="reftitle.errors && (reftitle.dirty || reftitle.touched)" class="alert alert-danger">
+                          <div [hidden]="!reftitle.errors.required">
+                              Title is required.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-2 control-label" for="description"> Description </label>
+                    <input type="text" [(ngModel)]="taskModel.Description" name="Description" class="form-control" placeholder="Enter Your Description"
+                        #refdescription='ngModel'>
+                </div>
+                  <div class="form-group required">
+                    <label class="col-md-2 control-label" for="date"> Completion Date </label>  
+                    <input type="date" [(ngModel)]="taskModel.Completion_Date" name="Completion_Date"  class="form-control" 
+                          #refcompletiondate='ngModel' required>
+                          <div *ngIf="refcompletiondate.errors && (refcompletiondate.dirty || refcompletiondate.touched)" class="alert alert-danger">
+                          <div [hidden]="!refcompletiondate.errors.required">
+                              Date is required
+                          </div>
+                          <div [hidden]="!refcompletiondate.errors.pattern">
+                              Please enter the date in dd/mm/yyyy format
+                          </div>
+                          </div>
+                  </div>
+                  
+                  <input type="submit" id="btn-login" class="btn btn-warning btn-block btn-lg" value="Submit Your Data" [disabled]="f.invalid">
+              </form>
+              <hr>
+          </div>
+      </div>
+      <!-- /.col-xs-12 -->
+  </div>
+  <!-- /.row -->
+</div>
+<div *ngIf="tasksList.length <= 0">
+    <div class="container">
+    <p>Hurray! No task Available</p>
+    </div>
+</div>
+<div *ngIf="tasksList.length > 0">
+    <app-task-list [taskDetail]="tasksList"></app-task-list>
+</div>
